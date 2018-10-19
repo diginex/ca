@@ -28,7 +28,9 @@ docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-a
 
 ## Proxy connection to the cluster
 
+```sh
 docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/k8s-admin kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
+```
 
 ## Dashbaord
 
