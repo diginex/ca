@@ -13,16 +13,11 @@
 
 ## Configure
 
-// todo
-docker run -it diginex/k8s-admin init | sh
-
-## Usage
-
 ```sh
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin <<command>>
+docker run -it diginex/k8s-admin init | sh
 ```
 
-## Example Command
+## Example Usage
 
 ```sh
 docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin kubectl get pods
@@ -31,15 +26,13 @@ docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-a
 docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin helm version
 ```
 
-// todo see if we can do docker run diginex/k8s-admin | sh kubectl get pods to eliminate the need of mount and -it.
-
 ## Proxy connection to the cluster
 
 docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/k8s-admin kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
 
-// todo see if we can do something like this: docker run diginex/k8s-admin proxy | sh
-
 ## Dashbaord
+
+After proxy created, we can view dashboard via proxy such as:
 
 ### Linkerd
 

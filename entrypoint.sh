@@ -3,6 +3,23 @@ prop () {
     grep "${1}" /conf/cluster.conf|cut -d'=' -f2-
 }
 
+if [ -z $1 ]
+then
+#    cat /k8s-admin.sh
+    echo "Please specify command to run. e.g. init, aws, kubectl, helm, linkerd\n"
+    echo "To init, please run: "
+    echo "  docker run diginex/k8s-admin init | sh\n"
+    echo "Usage:"
+    echo "  docker run -it -v \$HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin kubectl get pods"
+    exit 0
+fi
+
+if [ $1 = 'init' ]
+then
+    cat /init.sh
+    exit 0
+fi
+
 export PATH=$PATH:$HOME/.linkerd2/bin
 mkdir ~/.kube
 

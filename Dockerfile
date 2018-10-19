@@ -13,7 +13,9 @@ RUN curl -sL https://run.linkerd.io/install | sh
 RUN mkdir workspace
 RUN mkdir ./kube
 COPY ./kubeconfig.template ./kube/
-COPY ./entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh ./
+COPY ./init.sh ./
+COPY ./k8s-admin.sh ./
 RUN chmod +x /entrypoint.sh
 RUN mkdir conf
 ENTRYPOINT ["/entrypoint.sh"]
