@@ -5,12 +5,26 @@ prop () {
 
 if [ -z $1 ]
 then
-#    cat /k8s-admin.sh
+#    cat /ca.sh
     echo "Please specify command to run. e.g. init, aws, kubectl, helm, linkerd\n"
+    echo "To install:"
+    echo "  docker run diginex/ca install | sudo sh\n"
     echo "To init, please run: "
-    echo "  docker run diginex/k8s-admin init | sh\n"
+    echo "  ca init\n"
     echo "Usage:"
-    echo "  docker run -it -v \$HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin kubectl get pods"
+    echo "  ca kubectl get pods"
+    exit 0
+fi
+
+if [ $1 = 'install' ]
+then
+    cat /install.sh
+    exit 0
+fi
+
+if [ $1 = 'getScript' ]
+then
+    cat /ca.sh
     exit 0
 fi
 
@@ -34,6 +48,6 @@ then
     export AWS_DEFAULT_REGION=$(prop 'aws_default_region')
 fi
 
-sed -e "s;%%%KUBE_ENDPOINT_URL%%%;`printenv KUBE_ENDPOINT_URL`;g" -e "s;%%%KUBE_BASE64_CA_CERT%%%;`printenv KUBE_BASE64_CA_CERT`;g" -e "s;%%%KUBE_CLUSTER_NAME%%%;`printenv KUBE_CLUSTER_NAME`;g" ./kube/kubeconfig.template > ~/.kube/config
+sed -e "s;%%%KUBE_ENDPOINT_URL%%%;`printenv KUBE_ENDPOINT_URL`;g" -e "s;%%%KUBE_BASE64_CA_CERT%%%;`printenv KUBE_BASE64_CA_CERT`;g" -e "s;%%%KUBE_CLUSTER_NAME%%%;`printenv KUBE_CLUSTER_NAME`;g" /kube/kubeconfig.template > ~/.kube/config
 
 exec "$@"

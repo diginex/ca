@@ -11,25 +11,31 @@
 * helm
 * linkerd
 
+## Install
+
+```sh
+docker run diginex/ca install | sudo sh
+```
+
 ## Configure
 
 ```sh
-docker run -it diginex/k8s-admin init | sh
+ca init
 ```
 
 ## Example Usage
 
 ```sh
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin kubectl get pods
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin linkerd version
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin aws
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf diginex/k8s-admin helm version
+ca kubectl get pods
+ca linkerd version
+ca aws
+ca helm version
 ```
 
 ## Proxy connection to the cluster
 
 ```sh
-docker run -it -v $HOME/.k8s-admin/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/k8s-admin kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
+docker run -it -v $HOME/.ca/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/ca kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
 ```
 
 ## Dashbaord
