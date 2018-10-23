@@ -3,6 +3,7 @@
 if [ -z $1 ]
 then
     docker run --rm diginex/ca
+    exit 0
 fi
 
 if [ $1 = 'init' ]
