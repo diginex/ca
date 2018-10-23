@@ -8,7 +8,7 @@ then
 #    cat /ca.sh
     echo "Please specify command to run. e.g. init, aws, kubectl, helm, linkerd\n"
     echo "To install:"
-    echo "  docker run diginex/ca install | sudo sh\n"
+    echo "  docker run --rm diginex/ca install | sudo sh\n"
     echo "To init, please run: "
     echo "  ca init\n"
     echo "Usage:"

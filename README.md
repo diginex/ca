@@ -14,7 +14,7 @@
 ## Install
 
 ```sh
-docker run diginex/ca install | sudo sh
+docker run --rm diginex/ca install | sudo sh
 ```
 
 ## Configure
@@ -35,7 +35,7 @@ ca helm version
 ## Proxy connection to the cluster
 
 ```sh
-docker run -it -v $HOME/.ca/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/ca kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
+docker run --rm -it -v $HOME/.ca/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/ca kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
 ```
 
 ## Dashbaord
