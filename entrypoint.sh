@@ -41,7 +41,8 @@ then
     export AWS_ACCESS_KEY_ID=$(prop 'aws_access_key_id') 
     export AWS_SECRET_ACCESS_KEY=$(prop 'aws_secret_access_key') 
     export AWS_DEFAULT_REGION=$(prop 'aws_default_region')
+    export KUBE_CLUSTER_NAME=$(prop 'kube_cluster_name')
 fi
 
-aws eks update-kubeconfig --name $(prop 'kube_cluster_name') > /dev/null
+aws eks update-kubeconfig --name $KUBE_CLUSTER_NAME > /dev/null
 exec "$@"
