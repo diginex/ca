@@ -11,7 +11,6 @@ RUN chmod +x ./aws-iam-authenticator
 RUN cp ./aws-iam-authenticator usr/local/sbin/aws-iam-authenticator
 RUN curl -sL https://run.linkerd.io/install | sh
 RUN mkdir workspace
-RUN mkdir ./kube
 COPY ./*.sh ./
 RUN chmod +x /entrypoint.sh
 RUN mkdir conf
