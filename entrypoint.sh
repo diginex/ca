@@ -33,6 +33,14 @@ then
     exit 0
 fi
 
+# TODO
+#if [ $1 = 'createdeveloperns' ]
+#then
+#    /createdeveloperns.sh $2 $3
+#    
+#    exit 0
+#fi
+
 export PATH=$PATH:$HOME/.linkerd2/bin
 
 file="/conf/cluster.conf"
@@ -42,6 +50,12 @@ then
     export AWS_SECRET_ACCESS_KEY=$(prop 'aws_secret_access_key') 
     export AWS_DEFAULT_REGION=$(prop 'aws_default_region')
     export KUBE_CLUSTER_NAME=$(prop 'kube_cluster_name')
+fi
+
+if [ -z $KUBE_CLUSTER_NAME ]
+then
+    exec "$@"
+    exit 0
 fi
 
 aws eks update-kubeconfig --name $KUBE_CLUSTER_NAME > /dev/null
