@@ -10,6 +10,9 @@ RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/
 RUN chmod +x ./aws-iam-authenticator
 RUN cp ./aws-iam-authenticator usr/local/sbin/aws-iam-authenticator
 RUN curl -sL https://run.linkerd.io/install | sh
+RUN curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
+RUN tar xzf helm.tar.gz
+RUN cp ./linux-amd64/helm usr/local/sbin/
 RUN mkdir workspace
 COPY ./*.sh ./
 RUN chmod +x /entrypoint.sh
