@@ -1,6 +1,6 @@
 FROM python:3.7.0
 RUN apt-get update && apt-get install -y apt-transport-https curl gnupg2 groff
-RUN pip install --upgrade awscli
+RUN pip install awscli --upgrade
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN touch /etc/apt/sources.list.d/kubernetes.list 
 RUN echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
@@ -13,6 +13,9 @@ RUN curl -sL https://run.linkerd.io/install | sh
 RUN curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.11.0-linux-amd64.tar.gz
 RUN tar xzf helm.tar.gz
 RUN cp ./linux-amd64/helm usr/local/sbin/
+RUN wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+RUN chmod +x ./kops
+RUN mv ./kops /usr/local/bin/
 RUN mkdir workspace
 COPY ./*.sh ./
 RUN chmod +x /entrypoint.sh
