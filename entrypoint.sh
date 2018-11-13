@@ -50,13 +50,22 @@ then
     export AWS_SECRET_ACCESS_KEY=$(prop 'aws_secret_access_key') 
     export AWS_DEFAULT_REGION=$(prop 'aws_default_region')
     export KUBE_CLUSTER_NAME=$(prop 'kube_cluster_name')
+    export KOPS_CLUSTER_NAME=$(prop 'kops_cluster_name')
+    export KOPS_STATE_STORE=$(prop 'kops_state_store')
 fi
 
-if [ -z $KUBE_CLUSTER_NAME ]
+if [ ! -z $KUBE_CLUSTER_NAME ]
 then
+    aws eks update-kubeconfig --name $KUBE_CLUSTER_NAME > /dev/null
     exec "$@"
     exit 0
 fi
 
-aws eks update-kubeconfig --name $KUBE_CLUSTER_NAME > /dev/null
+if [ ! -z $KOPS_CLUSTER_NAME ]
+then
+    kops export kubecfg --name ${KOPS_CLUSTER_NAME}
+    exec "$@"
+    exit 0
+fi
+
 exec "$@"
