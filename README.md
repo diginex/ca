@@ -34,6 +34,36 @@ ca aws
 ca helm version
 ```
 
+## Required field for EKS Cluster Admin
+
+* aws_access_key_id
+* aws_secret_access_key
+* aws_default_region
+* kube_cluster_name
+
+## Required fields for KOPS Cluster Admin
+
+* aws_access_key_id
+* aws_secret_access_key
+* aws_default_region
+* kops_cluster_name
+* kops_state_store
+
+### Export KOPS CA data
+
+```sh
+ca export_ca_data
+```
+
+## Required fields for KOPS Cluster Normal Usage
+
+* aws_access_key_id
+* aws_secret_access_key
+* aws_default_region
+* kops_cluster_name
+* kops_ca_data
+* kops_operation_role [KubernetesAdmin, Developer]
+
 ## Proxy connection to the cluster
 
 ```sh
