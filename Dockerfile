@@ -20,7 +20,9 @@ RUN wget https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/downl
 RUN chmod +x heptio-authenticator-aws
 RUN mv heptio-authenticator-aws /usr/local/bin/
 RUN mkdir workspace
+COPY ./kubeconfig.template.yaml ./
 COPY ./*.sh ./
+COPY ./export_ca_data.sh /usr/local/bin/export_ca_data
 RUN chmod +x /entrypoint.sh
 RUN mkdir conf
 WORKDIR /workspace

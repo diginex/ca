@@ -52,6 +52,9 @@ then
     export KUBE_CLUSTER_NAME=$(prop 'kube_cluster_name')
     export KOPS_CLUSTER_NAME=$(prop 'kops_cluster_name')
     export KOPS_STATE_STORE=$(prop 'kops_state_store')
+    export KOPS_CA_DATA=$(prop 'kops_ca_data')
+    export KOPS_OPERATION_ROLE=$(prop 'kops_operation_role')
+
 fi
 
 if [ ! -z $KUBE_CLUSTER_NAME ]
@@ -63,6 +66,13 @@ fi
 
 if [ ! -z $KOPS_CLUSTER_NAME ]
 then
+    if [ ! -z $KOPS_CA_DATA ]
+    then
+        ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
+        sed -e "s;%%%KOPS_CA_DATA%%%;$KOPS_CA_DATA;g" -e "s;%%%KOPS_CLUSTER_NAME%%%;$KOPS_CLUSTER_NAME;g" -e "s;%%%ACCOUNT_ID%%%;$ACCOUNT_ID;g" -e "s;%%%KOPS_OPERATION_ROLE%%%;$KOPS_OPERATION_ROLE;g" ./kubeconfig.template.yaml | install -D /dev/stdin ~/.kube/config
+        exec "$@"
+        exit 0
+    fi
     kops export kubecfg --name ${KOPS_CLUSTER_NAME}
     exec "$@"
     exit 0
