@@ -1,8 +1,9 @@
 # Kubernetes Cluster admin docker
 
-## Supported Cluster
+## Supported Cluster Type
 
 * Amazon EKS
+* Kops on AWS
 
 ## Supported Cluster Command
 
@@ -10,6 +11,7 @@
 * kubectl
 * helm
 * linkerd
+* kops
 
 ## Install
 
