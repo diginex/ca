@@ -73,7 +73,13 @@ then
         exec "$@"
         exit 0
     fi
-    kops export kubecfg --name ${KOPS_CLUSTER_NAME}
+
+    if [ -z $SUPPRESS_INFO ]
+    then
+        kops export kubecfg --name ${KOPS_CLUSTER_NAME}
+    else
+        kops export kubecfg --name ${KOPS_CLUSTER_NAME} > /dev/null
+    fi
     exec "$@"
     exit 0
 fi
