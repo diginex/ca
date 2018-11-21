@@ -69,7 +69,7 @@ then
     if [ ! -z $KOPS_CA_DATA ]
     then
         ACCOUNT_ID=$(aws sts get-caller-identity --output text --query 'Account')
-        sed -e "s;%%%KOPS_CA_DATA%%%;$KOPS_CA_DATA;g" -e "s;%%%KOPS_CLUSTER_NAME%%%;$KOPS_CLUSTER_NAME;g" -e "s;%%%ACCOUNT_ID%%%;$ACCOUNT_ID;g" -e "s;%%%KOPS_OPERATION_ROLE%%%;$KOPS_OPERATION_ROLE;g" ./kubeconfig.template.yaml | install -D /dev/stdin ~/.kube/config
+        sed -e "s;%%%KOPS_CA_DATA%%%;$KOPS_CA_DATA;g" -e "s;%%%KOPS_CLUSTER_NAME%%%;$KOPS_CLUSTER_NAME;g" -e "s;%%%ACCOUNT_ID%%%;$ACCOUNT_ID;g" -e "s;%%%KOPS_OPERATION_ROLE%%%;$KOPS_OPERATION_ROLE;g" /kubeconfig.template.yaml | install -D /dev/stdin ~/.kube/config
         exec "$@"
         exit 0
     fi
