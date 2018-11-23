@@ -1,5 +1,12 @@
 # Kubernetes Cluster admin docker
 
+## TODOs
+
+* A tool to query chart name for the project. (Chart detector).
+* A tool to place chart values.yaml and place in project.
+* A tool to init .gitlab-ci.yaml into the project.
+* A tool to automatically substitute parameters in values.yaml with a predifined list of parameters.
+
 ## Supported Cluster Type
 
 * Amazon EKS
