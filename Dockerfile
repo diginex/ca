@@ -19,6 +19,9 @@ RUN mv ./kops /usr/local/bin/
 RUN wget https://github.com/kubernetes-sigs/aws-iam-authenticator/releases/download/v0.3.0/heptio-authenticator-aws_0.3.0_linux_amd64 -O heptio-authenticator-aws
 RUN chmod +x heptio-authenticator-aws
 RUN mv heptio-authenticator-aws /usr/local/bin/
+RUN wget -O helmfile https://github.com/roboll/helmfile/releases/download/v0.41.0/helmfile_linux_amd64
+RUN chmod +x helmfile
+RUN mv helmfile /usr/local/bin/
 RUN mkdir workspace
 COPY ./kubeconfig.template.yaml ./
 COPY ./*.sh ./
