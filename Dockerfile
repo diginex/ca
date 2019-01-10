@@ -29,4 +29,5 @@ COPY ./export_ca_data.sh /usr/local/bin/export_ca_data
 RUN chmod +x /entrypoint.sh
 RUN mkdir conf
 WORKDIR /workspace
+RUN helm init --client-only
 ENTRYPOINT ["/entrypoint.sh"]
