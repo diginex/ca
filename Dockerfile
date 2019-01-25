@@ -10,7 +10,7 @@ RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/
 RUN chmod +x ./aws-iam-authenticator
 RUN cp ./aws-iam-authenticator usr/local/sbin/aws-iam-authenticator
 RUN curl -sL https://run.linkerd.io/install | sh
-RUN curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.0-linux-amd64.tar.gz
+RUN curl -o helm.tar.gz https://storage.googleapis.com/kubernetes-helm/helm-v2.12.3-linux-amd64.tar.gz
 RUN tar xzf helm.tar.gz
 RUN cp ./linux-amd64/helm usr/local/sbin/
 RUN wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
