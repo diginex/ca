@@ -22,6 +22,9 @@ RUN mv heptio-authenticator-aws /usr/local/bin/
 RUN wget -O helmfile https://github.com/roboll/helmfile/releases/download/v0.41.0/helmfile_linux_amd64
 RUN chmod +x helmfile
 RUN mv helmfile /usr/local/bin/
+RUN wget https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
+RUN rm ./go1.11.5.linux-amd64.tar.gz
 RUN mkdir workspace
 COPY ./kubeconfig.template.yaml ./
 COPY ./*.sh ./
