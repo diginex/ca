@@ -29,8 +29,11 @@ RUN mkdir workspace
 COPY ./kubeconfig.template.yaml ./
 COPY ./*.sh ./
 COPY ./export_ca_data.sh /usr/local/bin/export_ca_data
+COPY ./bashrc /
 RUN chmod +x /entrypoint.sh
 RUN mkdir conf
+RUN cat /bashrc >> ~/.bashrc
+RUN rm /bashrc
 WORKDIR /workspace
 RUN helm init --client-only
 ENTRYPOINT ["/entrypoint.sh"]

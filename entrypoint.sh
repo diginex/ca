@@ -3,9 +3,7 @@ prop () {
     grep "${1}" /conf/cluster.conf|cut -d'=' -f2-
 }
 
-export PATH=$PATH:/usr/local/go/bin
 source ~/.profile
-export EDITOR=nano
 
 if [ -z $1 ]
 then
