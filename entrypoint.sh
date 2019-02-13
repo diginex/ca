@@ -35,6 +35,12 @@ then
     exit 0
 fi
 
+if [ $1 = 'deploy' ]
+then
+    cat /deploy.sh
+    exit 0
+fi
+
 # TODO
 #if [ $1 = 'createdeveloperns' ]
 #then
