@@ -36,4 +36,5 @@ RUN cat /bashrc >> ~/.bashrc
 RUN rm /bashrc
 WORKDIR /workspace
 RUN helm init --client-only
+RUN /usr/local/go/bin/go get github.com/hairyhenderson/gomplate/cmd/gomplate
 ENTRYPOINT ["/entrypoint.sh"]
