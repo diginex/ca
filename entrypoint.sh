@@ -47,6 +47,12 @@ then
     exit 0
 fi
 
+if [ $1 = 'builddeploydocker' ]
+then
+    cat /builddeploydocker.sh
+    exit 0
+fi
+
 # TODO
 #if [ $1 = 'createdeveloperns' ]
 #then
