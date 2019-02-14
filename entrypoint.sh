@@ -41,6 +41,12 @@ then
     exit 0
 fi
 
+if [ $1 = 'deploychart' ]
+then
+    cat /deploychart.sh
+    exit 0
+fi
+
 # TODO
 #if [ $1 = 'createdeveloperns' ]
 #then
