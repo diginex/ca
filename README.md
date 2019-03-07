@@ -71,23 +71,30 @@ ca export_ca_data
 * kops_ca_data
 * kops_operation_role [KubernetesAdmin, Developer]
 
-## Proxy connection to the cluster
+## Proxy API connection
 
 ```sh
 docker run --rm -it -v $HOME/.ca/cluster.conf:/conf/cluster.conf -p 8080:8080 diginex/ca kubectl proxy --address 0.0.0.0 --accept-hosts '.*' --port 8080
 ```
 
+## Proxy Service connection
+
+```sh
+docker run --rm -it -v $HOME/.ca/cluster.conf:/conf/cluster.conf -p 5601:5601 diginex/ca kubectl port-forward --namespace elastic svc/elastic-kibana --address 0.0.0.0 5601:443
+```
+
 ## Dashbaord
 
 After proxy created, we can view dashboard via proxy such as:
+<http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/login>
 
 ### Linkerd
 
-<http://127.0.0.1:8080/api/v1/namespaces/linkerd/services/web:http/proxy/>
+<http://localhost:8080/api/v1/namespaces/linkerd/services/web:http/proxy/>
 
 ### Grafana
 
-<http://127.0.0.1:8080/api/v1/namespaces/linkerd/services/grafana:http/proxy/>
+<http://localhost:8080/api/v1/namespaces/linkerd/services/grafana:http/proxy/>
 
 ## About Diginex
 
