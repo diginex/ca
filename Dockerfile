@@ -37,4 +37,5 @@ RUN rm /bashrc
 WORKDIR /workspace
 RUN helm init --client-only
 RUN /usr/local/go/bin/go get github.com/hairyhenderson/gomplate/cmd/gomplate
+RUN helm plugin install https://github.com/chartmuseum/helm-push
 ENTRYPOINT ["/entrypoint.sh"]
