@@ -1,11 +1,14 @@
 FROM python:3.7.0
-RUN apt-get update && apt-get install -y apt-transport-https curl gnupg2 groff nano
+RUN apt-get update
+RUN apt-get install -y apt-utils apt-transport-https curl gnupg2 groff nano
+RUN pip install --upgrade pip
 RUN pip install awscli --upgrade
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN touch /etc/apt/sources.list.d/kubernetes.list 
 RUN echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list
 RUN apt-get update
 RUN apt-get install -y kubectl
+RUN apt-get upgrade -y
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
 RUN chmod +x ./aws-iam-authenticator
 RUN cp ./aws-iam-authenticator usr/local/sbin/aws-iam-authenticator
@@ -34,6 +37,9 @@ RUN chmod +x /entrypoint.sh
 RUN mkdir conf
 RUN cat /bashrc >> ~/.bashrc
 RUN rm /bashrc
+RUN wget https://github.com/heptio/velero/releases/download/v1.0.0/velero-v1.0.0-linux-amd64.tar.gz
+RUN tar -xzvf velero-v1.0.0-linux-amd64.tar.gz
+RUN cp ./velero-v1.0.0-linux-amd64/velero usr/local/sbin
 WORKDIR /workspace
 RUN helm init --client-only
 RUN /usr/local/go/bin/go get github.com/hairyhenderson/gomplate/cmd/gomplate
