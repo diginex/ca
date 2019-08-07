@@ -40,6 +40,9 @@ RUN rm /bashrc
 RUN wget https://github.com/heptio/velero/releases/download/v1.0.0/velero-v1.0.0-linux-amd64.tar.gz
 RUN tar -xzvf velero-v1.0.0-linux-amd64.tar.gz
 RUN cp ./velero-v1.0.0-linux-amd64/velero usr/local/sbin
+RUN curl -sSL https://get.pulumi.com | sh
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN ln -s ~/.pulumi/bin/pulumi /usr/local/bin/pulumi
 WORKDIR /workspace
 RUN helm init --client-only
 RUN /usr/local/go/bin/go get github.com/hairyhenderson/gomplate/cmd/gomplate
