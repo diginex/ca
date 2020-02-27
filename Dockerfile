@@ -25,9 +25,9 @@ RUN mv heptio-authenticator-aws /usr/local/bin/
 RUN wget -O helmfile https://github.com/roboll/helmfile/releases/download/v0.41.0/helmfile_linux_amd64
 RUN chmod +x helmfile
 RUN mv helmfile /usr/local/bin/
-RUN wget https://dl.google.com/go/go1.11.5.linux-amd64.tar.gz
-RUN tar -C /usr/local -xzf go1.11.5.linux-amd64.tar.gz
-RUN rm ./go1.11.5.linux-amd64.tar.gz
+RUN wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz
+RUN tar -C /usr/local -xzf go1.13.1.linux-amd64.tar.gz
+RUN rm ./go1.13.1.linux-amd64.tar.gz
 RUN mkdir workspace
 COPY ./kubeconfig.template.yaml ./
 COPY ./*.sh ./
@@ -43,6 +43,8 @@ RUN cp ./velero-v1.0.0-linux-amd64/velero usr/local/sbin
 RUN curl -sSL https://get.pulumi.com | sh
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 RUN ln -s ~/.pulumi/bin/pulumi /usr/local/bin/pulumi
+RUN wget https://github.com/mozilla/sops/releases/download/3.4.0/sops_3.4.0_amd64.deb
+RUN apt-get install -f ./sops_3.4.0_amd64.deb
 WORKDIR /workspace
 RUN helm init --client-only
 RUN /usr/local/go/bin/go get github.com/hairyhenderson/gomplate/cmd/gomplate
